@@ -1,0 +1,72 @@
+<div class="builder">
+  <header class="builder__header">
+    <nav class="builder__toolbar">
+      <app-button label="About me" (clicked)="add('summary')"> </app-button>
+
+      <app-button label="Experience" (clicked)="add('experience')">
+      </app-button>
+
+      <app-button label="Education" (clicked)="add('education')"> </app-button>
+
+      <app-button label="Skills" (clicked)="add('skills')"> </app-button>
+
+      <app-button label="Projects" (clicked)="add('projects')"> </app-button>
+
+      <app-button label="Contacts" (clicked)="add('contacts')"> </app-button>
+
+      <app-button label="Custom section" (clicked)="add('custom')">
+      </app-button>
+    </nav>
+  </header>
+
+  <section class="builder__content">
+    <div class="builder__editor">
+      <div class="section-list" *ngIf="sections().length; else empty">
+        <div
+          class="section-item"
+          *ngFor="let s of sections(); let i = index; trackBy: trackById"
+        >
+          <div *ngIf="s.type !== 'hero'" class="section-item__controls">
+            <button
+              class="icon-btn"
+              title="up"
+              (click)="move(s.id, 'up')"
+              [disabled]="i === 0"
+            >
+              ↑
+            </button>
+            <button
+              class="icon-btn"
+              title="down"
+              (click)="move(s.id, 'down')"
+              [disabled]="i === sections().length - 1"
+            >
+              ↓
+            </button>
+            <button
+              class="icon-btn danger"
+              title="Delete"
+              (click)="delete(s.id)"
+            >
+              ✕
+            </button>
+          </div>
+          <app-resume-section [section]="s"></app-resume-section>
+        </div>
+      </div>
+
+      <ng-template #empty>
+        <div class="empty">
+          <p>
+            There are no sections yet. Add the first one - select the type in
+            the panel above.
+          </p>
+        </div>
+      </ng-template>
+    </div>
+
+    <div class="builder__preview">
+      <app-resume-preview></app-resume-preview>
+    </div>
+  </section>
+</div>

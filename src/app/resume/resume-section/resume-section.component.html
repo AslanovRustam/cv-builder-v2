@@ -1,0 +1,54 @@
+<div class="section">
+  <div *ngIf="section.type === 'hero'" class="container">
+    <div class="preview__header">
+      <label class="label btn-upload">
+        <span>Select Avatar</span>
+        <input
+          type="file"
+          accept="image/*"
+          (change)="onAvatarChange($event)"
+          hidden
+      /></label>
+      <div class="avatar-preview" *ngIf="section.avatarUrl">
+        <img [src]="section.avatarUrl" alt="Avatar preview" />
+      </div>
+    </div>
+    <div class="preview__header">
+      <label class="label btn-upload"
+        ><span>Select Company Logo</span>
+        <input
+          type="file"
+          accept="image/*"
+          (change)="onCompanyLogoChange($event)"
+          hidden
+        />
+      </label>
+      <div class="logo-preview" *ngIf="section.companyLogoUrl">
+        <img [src]="section.companyLogoUrl" alt="Company Logo" />
+      </div>
+    </div>
+  </div>
+
+  <label class="label">Head</label>
+  <input
+    class="input"
+    [value]="section.title"
+    (input)="onTitleChange($event)"
+    type="text"
+    placeholder="Example"
+  />
+
+  <label class="label">Content</label>
+  <textarea
+    class="textarea"
+    [value]="section.content"
+    (input)="onContentChange($event)"
+    rows="5"
+    placeholder="Describe the information for this section..."
+  ></textarea>
+
+  <p class="hint">
+    You can insert line breaks. In the "Preview" on the right, the formatting
+    will be preserved.
+  </p>
+</div>

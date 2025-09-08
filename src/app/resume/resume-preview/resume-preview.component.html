@@ -1,0 +1,52 @@
+<div class="preview">
+  <div class="preview__head_title">
+    <h2 class="preview__title">Preview</h2>
+    <app-button label="Download PDF" (clicked)="downloadPdf()"></app-button>
+  </div>
+  <div #pdfContent class="pdf__content">
+    @if(heroSection){
+    <div class="preview__hero">
+      <div
+        class="logo-preview"
+        [style.backgroundImage]="'url(' + heroSection.avatarUrl + ')'"
+      ></div>
+      <!-- <img
+        *ngIf="heroSection.avatarUrl"
+        class="hero__avatar"
+        [src]="heroSection.avatarUrl"
+        alt="Avatar"
+      /> -->
+      <div>
+        <h3>{{ heroSection.title }}</h3>
+        <pre>{{ heroSection.content }}</pre>
+      </div>
+      <!-- <img
+        *ngIf="heroSection.companyLogoUrl"
+        class="hero__logo"
+        [src]="heroSection.companyLogoUrl"
+        alt="Avatar"
+      /> -->
+      <div
+        class="hero__logo"
+        [style.backgroundImage]="'url(' + heroSection.companyLogoUrl + ')'"
+      ></div>
+    </div>
+    }
+
+    <div *ngIf="sections().length; else noData">
+      <div
+        class="preview__section"
+        *ngFor="let s of sections(); trackBy: trackById"
+        [hidden]="s.type === 'hero'"
+      >
+        <h3 class="preview__section-title">{{ s.title }}</h3>
+        <pre class="preview__content">{{ s.content }}</pre>
+      </div>
+    </div>
+    <ng-template #noData>
+      <p class="preview__empty">
+        There is no data to display. Add and edit sections on the left.
+      </p>
+    </ng-template>
+  </div>
+</div>
