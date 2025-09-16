@@ -1,0 +1,129 @@
+.project-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--border-white);
+  border-radius: 8px;
+  background-color: var(--bg-white);
+
+  label.label {
+    font-size: 12px;
+    color: var(--color-light-gray);
+  }
+
+  .input {
+    border: 1px solid var(--border-white);
+    border-radius: 8px;
+    padding: 8px 30px 8px 8px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  select.input {
+    cursor: pointer;
+    background-color: var(--bg-white);
+  }
+
+  .textarea {
+    border: 1px solid var(--border-white);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 14px;
+    min-height: 100px;
+    resize: none;
+  }
+
+  .dates {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    input[type="date"] {
+      border: 1px solid var(--border-white);
+      border-radius: 8px;
+      padding: 6px 8px;
+      font-size: 14px;
+      width: 150px;
+    }
+  }
+}
+
+.tasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  li {
+    position: relative;
+  }
+
+  .icon-btn {
+    position: absolute;
+    top: 50%;
+    right: 1px;
+    transform: translate(0, -50%);
+  }
+}
+
+.icon-btn {
+  appearance: none;
+  border: none;
+  background: var(--color-white);
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: var(--transition);
+}
+.icon-btn:hover {
+  background: var(--color-white2);
+}
+.icon-btn.danger {
+  border-color: var(--border-red);
+  color: var(--color-red);
+}
+.icon-btn.danger:hover {
+  background: var(--bg-red);
+}
+
+.tech-select {
+  position: relative;
+  margin-bottom: 12px;
+
+  .input {
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+    padding: 8px;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .custom-tech {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+
+      input {
+        flex: 1;
+      }
+    }
+  }
+}

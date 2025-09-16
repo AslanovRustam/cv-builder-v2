@@ -6,8 +6,63 @@
   --color-bright: #e5e7eb;
   --color-light-gray: #6b7280;
   --color-white: #ffffff;
+  --color-white2: #f3f4f6;
+  --bg-white: #fafafa;
+  --bg-red: #fff1f2;
+  --bg-green: #daefe5;
+  --border-white: #d1d5db;
+  --border-red: #fecaca;
+  --border-light-gray: #b8c0cf;
+  --color-red: #b91c1c;
+  --color-accent: #2ad4c3;
+  --gradient-accent: linear-gradient(
+    90deg,
+    rgba(42, 212, 195, 1) 0%,
+    rgba(145, 196, 167, 1) 79%
+  );
+
+  // transition
+  --transition: all 0.3s ease-in-out;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Lato", sans-serif;
 }
 
+ul,
+ol {
+  list-style: none;
+}
+// html,
+// body {
+//   margin: 0;
+//   padding: 0;
+//   width: 100vw;
+//   max-width: 100vw;
+//   overflow-x: hidden;
+// }
+
+// app-root {
+//   display: block;
+//   width: 100vw;
+//   max-width: 100vw;
+// }
+
 body {
-  font-family: "Montserrat", sans-serif;
+}
+.full-width {
+  width: 100%;
+}
+
+.btn.green-bg {
+  background: var(--gradient-accent);
+  color: var(--bg-white);
+  transition: var(--transition);
+
+  &:hover {
+    background: var(--gradient-accent);
+    opacity: 0.8;
+  }
 }

@@ -1,15 +1,15 @@
 .btn {
   appearance: none;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-white);
   background: var(--color-white);
   padding: 6px 10px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
-  transition: all 0.3s ease-in-out;
+  transition: var(--transition);
 
   &:hover {
-    background: #daefe5;
-    border-color: #281c74;
+    background: var(--bg-green);
+    border-color: var(--border-white);
   }
 }

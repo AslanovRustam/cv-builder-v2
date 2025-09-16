@@ -1,0 +1,14 @@
+<div class="preview__header">
+  <label class="label">Position</label>
+  <select
+    class="input"
+    [ngModel]="position"
+    (ngModelChange)="positionChange.emit($event)"
+    (change)="onChange($event)"
+  >
+    <option value="" disabled>Select position</option>
+    <option value="Front-end Developer">Front-end Developer</option>
+    <option value="Back-end Developer">Back-end Developer</option>
+    <option value="Full-Stack Developer">Full-Stack Developer</option>
+  </select>
+</div>

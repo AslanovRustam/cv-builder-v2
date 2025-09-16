@@ -1,0 +1,102 @@
+<div class="project-item">
+  <label class="label">Project Name</label>
+  <input
+    class="input"
+    [(ngModel)]="project.projectName"
+    (ngModelChange)="changed()"
+  />
+
+  <label class="label">Role</label>
+  <select class="input" [(ngModel)]="project.role" (ngModelChange)="changed()">
+    <option value="" disabled>Select position</option>
+    <option value="Front-end Developer">Front-end Developer</option>
+    <option value="Back-end Developer">Back-end Developer</option>
+    <option value="Full-Stack Developer">Full-Stack Developer</option>
+  </select>
+
+  <label class="label">Period</label>
+  <div class="dates">
+    <input
+      type="date"
+      [(ngModel)]="project.period.start"
+      (ngModelChange)="changed()"
+    />
+    —
+    <input
+      type="date"
+      [(ngModel)]="project.period.end"
+      (ngModelChange)="changed()"
+    />
+  </div>
+
+  <label class="label">Description</label>
+  <textarea
+    class="textarea"
+    [(ngModel)]="project.description"
+    (ngModelChange)="changed()"
+  ></textarea>
+
+  <!-- <label class="label">Technologies</label>
+  <input
+    class="input"
+    placeholder="e.g. Angular, NestJS, MongoDB"
+    [value]="project.technologies.join(', ')"
+    (input)="onTechChange($event)"
+  /> -->
+
+  <label class="label">Tasks</label>
+  <ul class="tasks-list">
+    <li
+      *ngFor="
+        let task of project.tasks ?? [];
+        let i = index;
+        trackBy: trackByIndex
+      "
+    >
+      <input
+        class="input"
+        [(ngModel)]="project.tasks![i]"
+        (ngModelChange)="changed()"
+        placeholder="Enter task"
+      />
+      <button type="button" class="icon-btn danger" (click)="removeTask(i)">
+        ✕
+      </button>
+    </li>
+  </ul>
+  <app-button label="+ Add Task" (clicked)="addTask()"></app-button>
+
+  <label class="label">Technologies</label>
+  <div class="tech-select">
+    <button type="button" class="input" (click)="toggleDropdown()">
+      {{
+        project.technologies.length
+          ? project.technologies.join(", ")
+          : "Select technologies"
+      }}
+    </button>
+
+    <div class="dropdown" *ngIf="dropdownOpen">
+      <div *ngFor="let tech of availableTechnologies; trackBy: trackByIndex">
+        <label>
+          <input
+            type="checkbox"
+            [checked]="project.technologies.includes(tech)"
+            (change)="onTechToggle(tech, $event)"
+          />
+          {{ tech }}
+        </label>
+      </div>
+
+      <div class="custom-tech">
+        <input
+          type="text"
+          [(ngModel)]="customTech"
+          placeholder="Add custom tech..."
+          (keyup.enter)="addCustomTech()"
+        />
+        <button type="button" (click)="addCustomTech()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,44 +3,117 @@
     <h2 class="preview__title">Preview</h2>
     <app-button label="Download PDF" (clicked)="downloadPdf()"></app-button>
   </div>
-  <div #pdfContent class="pdf__content">
+  <div id="pdfContent" #pdfContent class="pdf__content">
     @if(heroSection){
     <div class="preview__hero">
-      <div
-        class="logo-preview"
-        [style.backgroundImage]="'url(' + heroSection.avatarUrl + ')'"
-      ></div>
-      <!-- <img
-        *ngIf="heroSection.avatarUrl"
-        class="hero__avatar"
+      <img
         [src]="heroSection.avatarUrl"
-        alt="Avatar"
-      /> -->
-      <div>
-        <h3>{{ heroSection.title }}</h3>
-        <pre>{{ heroSection.content }}</pre>
+        [alt]="heroSection.title"
+        class="avatar-preview"
+      />
+      <!-- <div
+        class="avatar-preview"
+        [style.backgroundImage]="'url(' + heroSection.avatarUrl + ')'"
+      ></div> -->
+
+      <div class="hero__bio_container">
+        <div class="hero__flex">
+          <div>
+            <h3 class="hero__name">{{ heroSection.title }}</h3>
+            <p class="hero__position">
+              {{ heroSection.position }}
+            </p>
+          </div>
+          <img
+            [src]="heroSection.companyLogoUrl"
+            alt="company logo"
+            class="hero__logo"
+          />
+          <!-- <div
+            class="hero__logo"
+            [style.backgroundImage]="'url(' + heroSection.companyLogoUrl + ')'"
+          ></div> -->
+        </div>
+        <p class="hero__content">{{ heroSection.content }}</p>
       </div>
-      <!-- <img
-        *ngIf="heroSection.companyLogoUrl"
-        class="hero__logo"
-        [src]="heroSection.companyLogoUrl"
-        alt="Avatar"
-      /> -->
-      <div
-        class="hero__logo"
-        [style.backgroundImage]="'url(' + heroSection.companyLogoUrl + ')'"
-      ></div>
     </div>
     }
 
-    <div *ngIf="sections().length; else noData">
-      <div
-        class="preview__section"
-        *ngFor="let s of sections(); trackBy: trackById"
-        [hidden]="s.type === 'hero'"
-      >
-        <h3 class="preview__section-title">{{ s.title }}</h3>
-        <pre class="preview__content">{{ s.content }}</pre>
+    <div *ngIf="sections().length; else noData" class="preview__sections">
+      <div class="preview__section-left">
+        <div
+          class="preview__section"
+          *ngFor="let s of sections(); trackBy: trackById"
+          [hidden]="
+            s.type === 'hero' ||
+            s.type === 'language' ||
+            s.type === 'technologies'
+          "
+        >
+          <ng-container *ngIf="s.type === 'projects'; else defaultSection">
+            <h3 class="preview__section-title">{{ s.title }}</h3>
+            <ul class="projects-list">
+              <li *ngFor="let project of s.projects">
+                <p class="project-name">
+                  {{ project.projectName }} | {{ project.role }}
+                </p>
+                <p class="project-date">
+                  {{ project.period.start | date : "MMMM yyyy" }} -
+                  {{ project.period.end | date : "MMMM yyyy" }}
+                </p>
+                <p class="project-description">{{ project.description }}</p>
+                <ul class="tasks-list">
+                  @for (task of project.tasks; track $index) {
+                  <li class="tasks-item">{{ task }}</li>
+                  }
+                </ul>
+
+                <div class="project-tech">
+                  <span
+                    *ngFor="let tech of project.technologies"
+                    class="tech-item"
+                  >
+                    <img
+                      *ngIf="getTechIcon(tech) as icon"
+                      [src]="icon"
+                      [alt]="tech"
+                      class="tech-icon"
+                    />
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </ng-container>
+
+          <ng-template #defaultSection>
+            <h3 class="preview__section-title">{{ s.title }}</h3>
+            <p class="preview__content">{{ s.content }}</p>
+          </ng-template>
+        </div>
+      </div>
+      <div class="preview__section-right">
+        <div
+          class="preview__section"
+          *ngFor="let s of sections(); trackBy: trackById"
+          [hidden]="s.type !== 'language'"
+        >
+          <h3 class="preview__section-title">{{ s.title }}</h3>
+          <ul class="language-list">
+            <li *ngFor="let lang of s.languages">
+              <span class="language-name">{{ lang.name }}</span> —
+              <span class="language-level">{{ lang.level }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <div *ngFor="let s of technologySections" class="preview__section">
+          <h3 class="preview__section-title">{{ s.title }}</h3>
+          <ul class="tech-list">
+            <li *ngFor="let tech of s.technologies" class="tech-item">
+              {{ tech }}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <ng-template #noData>

@@ -1,19 +1,82 @@
 .preview {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  color: var(--bg-white);
+  background-color: var(--color-dark-blue);
+  height: 100%;
 }
+
 .preview__head_title {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 12px;
+  border-bottom: 2px solid var(--bg-white);
 }
 
-.preview__title {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--color-dark-blue);
+.pdf__content {
+  padding: 12px;
+  height: 100%;
+  background-color: var(--color-dark-blue);
+}
+
+.preview__hero {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+// .avatar-preview,
+// .hero__logo {
+//   background-size: cover;
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   object-fit: cover;
+// }
+
+.avatar-preview {
+  width: 140px;
+  height: 140px;
+  border: 1px solid var(--border-white);
+  padding: 2px;
+  border-radius: 50%;
+  background-color: white;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.hero__logo {
+  margin-left: auto;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  // background-size: contain;
+}
+
+.hero__bio_container {
+  // width: 100%;
+}
+
+.hero__flex {
+  display: flex;
+}
+
+.hero__name {
+  font-size: 40px;
+  color: var(--color-accent);
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  color: transparent;
+  display: block;
+}
+.hero__position {
+  margin: 8px 0;
+  font-size: 16px;
+  opacity: 0.6;
+}
+.hero__content {
+  font-size: 16px;
 }
 
 .preview__section {
@@ -26,70 +89,104 @@
   margin: 0 0 6px 0;
   font-size: 16px;
   font-weight: 700;
-  color: var(--color-dark-blue);
 }
 
 .preview__content {
   margin: 0;
   white-space: pre-wrap;
   font-size: 14px;
-  color: var(--color-dark-blue);
 }
 
 .preview__empty {
   color: var(--color-light-gray);
 }
 
-.preview__header {
+.preview__sections {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 48px;
+  justify-content: space-between;
+  margin-top: 48px;
+}
+
+.projects-list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-bottom: 12px;
-
-  .logo-preview img {
-    max-height: 50px;
-    object-fit: contain;
-    border: 1px solid #ccc;
-    padding: 2px;
-  }
-}
-
-.preview__hero {
-  display: flex;
-  align-items: center;
   gap: 12px;
-  margin-bottom: 12px;
+}
 
-  .hero__avatar,
-  .hero__logo {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid #ccc;
+.project-name {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.project-date {
+  opacity: 0.6;
+  margin: 8px 8px 8px 0;
+}
+
+.tasks-list {
+  display: flex;
+  flex-direction: column;
+  list-style: disc;
+  margin: 16px;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0;
+
+  .tech-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--color-bright);
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 12px;
   }
 
-  .hero__logo {
-    border: none;
-    margin-left: auto;
-    border-radius: 5%;
+  .tech-icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
   }
 }
 
-.pdf__content {
-  padding: 12px;
+.tech-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  padding-top: 6px;
+
+  .tech-item {
+    text-align: center;
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent);
+    padding: 6px;
+    border-radius: 8px;
+  }
 }
-.logo-preview,
-.hero__logo {
-  width: 80px;
-  height: 80px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border: 1px solid #ccc;
-  padding: 2px;
-  border-radius: 50%;
-}
-.hero__logo {
-  border-radius: 5%;
+
+@page { size: A4; margin: 0; }
+
+@media print {
+  html, body {
+    margin: 0;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .preview { background: none; }
+
+  .pdf__content {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 16mm;
+    box-sizing: border-box;
+    background-color: var(--color-dark-blue);
+  }
 }

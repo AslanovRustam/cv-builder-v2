@@ -25,16 +25,18 @@
 
 .builder__content {
   display: grid;
-  grid-template-columns: 1fr 0.9fr;
+  grid-template-columns: 1fr 2fr;
   gap: 16px;
 }
 
 .builder__editor,
 .builder__preview {
-  border: 1px solid var(--color-brigh);
+  border: 1px solid var(--border-light-gray);
   border-radius: 12px;
-  padding: 12px;
   background: var(--color-white);
+}
+.builder__editor {
+  padding: 12px;
 }
 
 .section-list {
@@ -44,10 +46,10 @@
 }
 
 .section-item {
-  border: 1px solid var(--color-brigh);
+  border: 1px solid var(--color-light-gray);
   border-radius: 10px;
   padding: 10px;
-  background: #fafafa;
+  background: var(--bg-white);
 }
 
 .section-item__controls {
@@ -58,27 +60,28 @@
 
 .icon-btn {
   appearance: none;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-white);
   background: var(--color-white);
   padding: 4px 8px;
   border-radius: 6px;
   cursor: pointer;
   font-size: 13px;
+  transition: var(--transition);
 }
 .icon-btn:hover {
-  background: #f3f4f6;
+  background: var(--color-white2);
 }
 .icon-btn.danger {
-  border-color: #fecaca;
-  color: #b91c1c;
+  border-color: var(--border-red);
+  color: var(--color-red);
 }
 .icon-btn.danger:hover {
-  background: #fff1f2;
+  background: var(--bg-red);
 }
 
 .empty {
   color: var(--color-light-gray);
-  border: 1px dashed #d1d5db;
+  border: 1px dashed var(--border-white);
   border-radius: 10px;
   padding: 16px;
   text-align: center;

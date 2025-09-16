@@ -10,7 +10,9 @@
 }
 
 .preview__header {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .label {
@@ -21,23 +23,30 @@
 .btn-upload {
   cursor: pointer;
 
+  span {
+    padding: 4px;
+    border: 1px dashed var(--color-light-gray);
+    border-radius: 8px;
+    transition: var(--transition);
+  }
+
   &:hover {
     span {
-      transition: all 0.3s ease-in-out;
-      color: red;
+      background: var(--bg-green);
+      color: var(--color-dark-blue);
     }
   }
 }
 
 .input {
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-white);
   border-radius: 8px;
   padding: 8px 10px;
   font-size: 14px;
 }
 
 .textarea {
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-white);
   border-radius: 8px;
   padding: 8px 10px;
   font-size: 14px;
@@ -48,18 +57,157 @@
 
 .hint {
   margin: 0;
-  color: #9ca3af;
+  color: var(--color-light-gray);
   font-size: 12px;
 }
 
 .avatar-preview,
 .logo-preview {
   margin-top: 8px;
+}
+
+.avatar-preview {
   img {
     width: 80px;
     height: 80px;
     border-radius: 50%;
     object-fit: cover;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-white);
   }
+}
+
+.logo-preview {
+  img {
+    max-width: 100px;
+  }
+}
+.project-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  margin: 8px;
+}
+.icon-btn {
+  appearance: none;
+  border: 1px solid var(--border-white);
+  background: var(--color-white);
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: var(--transition);
+}
+.icon-btn:hover {
+  background: var(--color-white2);
+}
+.icon-btn.danger {
+  border-color: var(--border-red);
+  color: var(--color-red);
+}
+.icon-btn.danger:hover {
+  background: var(--bg-red);
+}
+
+.project-wrapper {
+  margin-bottom: 8px;
+}
+
+.language-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 10px;
+
+  .input {
+    flex: 1;
+  }
+
+  .select {
+    width: 160px;
+    padding: 4px;
+    border: 1px solid var(--color-light-gray);
+    outline: none;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23000' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 4px center;
+    background-size: 8px;
+  }
+}
+
+.selected-tech {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 8px 0;
+
+  .tech-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+.tech-select {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  font-size: 14px;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  .checkmark {
+    height: 18px;
+    width: 18px;
+    border: 1px solid var(--color-accent);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 2px;
+    transition: all 0.2s;
+  }
+
+  input:checked ~ .checkmark {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  .checkmark::after {
+    content: "";
+    display: none;
+    width: 5px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  input:checked ~ .checkmark::after {
+    display: block;
+  }
+}
+
+.tech-add {
+  display: flex;
+  align-items: center;
+  margin: 6px 0;
+  gap: 4px;
 }

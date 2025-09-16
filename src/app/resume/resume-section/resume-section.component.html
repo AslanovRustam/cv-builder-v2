@@ -29,26 +29,155 @@
     </div>
   </div>
 
-  <label class="label">Head</label>
-  <input
-    class="input"
-    [value]="section.title"
-    (input)="onTitleChange($event)"
-    type="text"
-    placeholder="Example"
-  />
+  <div *ngIf="section.type === 'hero'" class="preview__header">
+    <app-position-select [(position)]="section.position"></app-position-select>
+  </div>
 
-  <label class="label">Content</label>
-  <textarea
-    class="textarea"
-    [value]="section.content"
-    (input)="onContentChange($event)"
-    rows="5"
-    placeholder="Describe the information for this section..."
-  ></textarea>
+  <div *ngIf="section.type === 'projects'">
+    <h3>{{ section.title }}</h3>
 
-  <p class="hint">
+    <div
+      *ngFor="let p of section.projects ?? []; let i = index"
+      class="project-wrapper"
+    >
+      <div class="project-controls">
+        <button
+          (click)="moveProject(i, 'up')"
+          [disabled]="i === 0"
+          class="icon-btn"
+        >
+          ↑
+        </button>
+        <button
+          (click)="moveProject(i, 'down')"
+          [disabled]="i === (section.projects?.length ?? 0) - 1"
+          class="icon-btn"
+        >
+          ↓
+        </button>
+        <button (click)="deleteProject(i)" class="icon-btn danger">✕</button>
+      </div>
+
+      <app-project-item
+        [(project)]="section.projects![i]"
+        (projectChange)="onProjectChange(i, $event)"
+      ></app-project-item>
+    </div>
+
+    <app-button
+      label="+ Add Project"
+      (clicked)="addProject()"
+      class="green-bg full-width"
+    ></app-button>
+  </div>
+
+  <div *ngIf="section.type === 'language'">
+    <h3>{{ section.title }}</h3>
+
+    <div
+      *ngFor="let lang of section.languages ?? []; let i = index"
+      class="language-item"
+    >
+      <input
+        type="text"
+        class="input"
+        placeholder="Language (e.g. English)"
+        [value]="lang.name"
+        (input)="updateLanguage(i, 'name', $any($event.target).value)"
+      />
+
+      <select
+        class="select"
+        [value]="lang.level"
+        (change)="updateLanguage(i, 'level', $any($event.target).value)"
+      >
+        <option [value]="Levels.beginner">Beginner</option>
+        <option [value]="Levels.elementary">Elementary</option>
+        <option [value]="Levels.intermediate">Intermediate</option>
+        <option [value]="Levels.upper">Upper-Intermediate</option>
+        <option [value]="Levels.advanced">Advanced</option>
+        <option [value]="Levels.fluent">Fluent</option>
+        <option [value]="Levels.native">Native</option>
+      </select>
+
+      <button (click)="deleteLanguage(i)" class="icon-btn danger">✕</button>
+    </div>
+
+    <app-button
+      label="+ Add Language"
+      (clicked)="addLanguage()"
+      class="full-width green-bg"
+    ></app-button>
+  </div>
+
+  <div *ngIf="section.type === 'technologies'">
+    <h3>{{ section.title }}</h3>
+
+    <div class="tech-select">
+      <label *ngFor="let tech of technologyKeys" class="custom-checkbox">
+        <input
+          type="checkbox"
+          [checked]="section.technologies?.includes(tech)"
+          (change)="onTechToggle(tech, $event)"
+        />
+        <span class="checkmark"></span>
+        {{ tech }}
+      </label>
+    </div>
+
+    <div class="tech-add">
+      <input
+        type="text"
+        placeholder="Add new technology"
+        [(ngModel)]="newTech"
+        class="input"
+      />
+      <app-button
+        label="Add"
+        (clicked)="addTechnology()"
+        class="green-bg"
+      ></app-button>
+    </div>
+
+    <ul class="selected-tech">
+      <li *ngFor="let tech of section.technologies" class="tech-item">
+        {{ tech }}
+        <button (click)="removeTechnology(tech)" class="icon-btn danger">
+          ✕
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <div
+    *ngIf="
+      section.type !== 'projects' &&
+      section.type !== 'language' &&
+      section.type !== 'technologies'
+    "
+    class="section"
+  >
+    <label class="label">Head</label>
+    <input
+      class="input"
+      [value]="section.title"
+      (input)="onTitleChange($event)"
+      type="text"
+      placeholder="Example"
+    />
+
+    <label class="label">Content</label>
+    <textarea
+      class="textarea"
+      [value]="section.content"
+      (input)="onContentChange($event)"
+      rows="5"
+      placeholder="Describe the information for this section..."
+    ></textarea>
+  </div>
+
+  <!-- <p class="hint">
     You can insert line breaks. In the "Preview" on the right, the formatting
     will be preserved.
-  </p>
+  </p> -->
 </div>
