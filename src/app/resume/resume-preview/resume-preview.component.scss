@@ -172,7 +172,7 @@
 
 @page {
   size: A4;
-  // margin: 10mm 0;
+  margin: 10mm 0;
   background: var(--color-dark-blue);
 }
 
@@ -197,7 +197,7 @@
     min-height: 297mm;
     height: 100%;
     padding: 1px;
-    // padding: 16mm;
+    padding: 0 10mm;
     box-sizing: border-box;
     background-color: var(--color-dark-blue);
   }
