@@ -172,7 +172,8 @@
 
 @page {
   size: A4;
-  margin: 10mm 0;
+  // margin: 10mm;
+  padding: 5mm;
   background: var(--color-dark-blue);
 }
 
@@ -193,20 +194,22 @@
   }
 
   .pdf__content {
+    position: absolute;
+    inset: 0;
     width: 210mm;
     min-height: 297mm;
     height: 100%;
-    padding: 1px;
-    padding: 10mm;
+    // padding: 1px;
+    // padding: 10mm;
     box-sizing: border-box;
     background-color: var(--color-dark-blue);
   }
 
-  #pdfContent {
-    position: absolute;
-    inset: 0;
-    // padding: 0 10px;
-  }
+  // #pdfContent {
+  //   position: absolute;
+  //   inset: 0;
+  //   padding: 10mm 5mm;
+  // }
 
   .preview__head_title {
     display: none;
