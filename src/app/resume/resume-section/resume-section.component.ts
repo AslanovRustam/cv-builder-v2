@@ -6,7 +6,10 @@ import { PositionSelectComponent } from '../../shared/position-select/position-s
 import { ProjectItemComponent } from '../../project-item/project-item.component';
 import { ButtonComponent } from '../../shared/button/button.component';
 import { Levels } from '../../../enums/language-levels.enum';
-import { TECHNOLOGY } from '../../../constants/technology';
+import {
+  TechnologyItem,
+  TechnologyService,
+} from '../../services/technology.service';
 
 @Component({
   selector: 'app-resume-section',
@@ -25,11 +28,17 @@ export class ResumeSectionComponent {
   @Input({ required: true }) section!: ResumeSection;
 
   Levels = Levels;
-  technologyMap = TECHNOLOGY;
-  technologyKeys = Object.keys(TECHNOLOGY);
   newTech = '';
 
   private resume = inject(ResumeService);
+  private technologyService = inject(TechnologyService);
+  technologies: TechnologyItem[] = [];
+
+  ngOnInit() {
+    this.technologyService.getTechnologiesStream().subscribe((techs) => {
+      this.technologies = techs;
+    });
+  }
 
   onTitleChange(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -191,23 +200,27 @@ export class ResumeSectionComponent {
   }
 
   addTechnology() {
-    const tech = this.newTech.trim();
-    if (!tech) return;
+    const techName = this.newTech.trim();
+    if (!techName) return;
+
+    const existsInSection = this.section.technologies?.some(
+      (t) => t.toLowerCase() === techName.toLowerCase()
+    );
 
     if (!this.section.technologies) {
       this.section.technologies = [];
     }
 
-    if (!this.section.technologies.includes(tech)) {
-      this.section.technologies.push(tech);
+    if (!existsInSection) {
+      this.section.technologies.push(techName);
+
+      this.technologyService.addCustomTechnology({ name: techName });
+
+      this.technologies = this.technologyService.getTechnologies();
+
       this.resume.updateSection(this.section.id, {
         technologies: this.section.technologies,
       });
-    }
-
-    // Добавляем в общие ключи, чтобы чекбоксы появились
-    if (!this.technologyKeys.includes(tech)) {
-      this.technologyKeys.push(tech);
     }
 
     this.newTech = '';

@@ -114,18 +114,18 @@
     <h3>{{ section.title }}</h3>
 
     <div class="tech-select">
-      <label *ngFor="let tech of technologyKeys" class="custom-checkbox">
+      <label *ngFor="let tech of technologies" class="custom-checkbox">
         <input
           type="checkbox"
-          [checked]="section.technologies?.includes(tech)"
-          (change)="onTechToggle(tech, $event)"
+          [checked]="section.technologies?.includes(tech.name)"
+          (change)="onTechToggle(tech.name, $event)"
         />
         <span class="checkmark"></span>
-        {{ tech }}
+        {{ tech.name }}
       </label>
     </div>
 
-    <div class="tech-add">
+    <!-- <div class="tech-add">
       <input
         type="text"
         placeholder="Add new technology"
@@ -137,7 +137,7 @@
         (clicked)="addTechnology()"
         class="green-bg"
       ></app-button>
-    </div>
+    </div> -->
 
     <ul class="selected-tech">
       <li *ngFor="let tech of section.technologies" class="tech-item">

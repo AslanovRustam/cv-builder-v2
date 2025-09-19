@@ -1,4 +1,4 @@
-export const TECHNOLOGY = {
+export const TECHNOLOGY: Record<string, string> = {
   Angular: '/icons/angular.svg',
   React: '/icons/React_light.svg',
   'Node.js': '/icons/nodejs.svg',

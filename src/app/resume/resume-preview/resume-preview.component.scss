@@ -149,8 +149,8 @@
   }
 
   .tech-icon {
-    width: 16px;
-    height: 16px;
+    width: 32px;
+    height: 32px;
     object-fit: contain;
   }
 }
@@ -170,23 +170,45 @@
   }
 }
 
-@page { size: A4; margin: 0; }
+@page {
+  size: A4;
+  // margin: 10mm 0;
+  background: var(--color-dark-blue);
+}
 
 @media print {
-  html, body {
+  html,
+  body {
     margin: 0;
     padding: 0;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
+  body {
+    background: var(--color-dark-blue) !important;
+  }
 
-  .preview { background: none; }
+  .preview {
+    background: none;
+  }
 
   .pdf__content {
     width: 210mm;
     min-height: 297mm;
-    padding: 16mm;
+    height: 100%;
+    padding: 1px;
+    // padding: 16mm;
     box-sizing: border-box;
     background-color: var(--color-dark-blue);
+  }
+
+  #pdfContent {
+    position: absolute;
+    inset: 0;
+    // padding: 0 10px;
+  }
+
+  .preview__head_title {
+    display: none;
   }
 }

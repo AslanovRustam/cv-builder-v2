@@ -86,3 +86,13 @@
   padding: 16px;
   text-align: center;
 }
+
+@media print {
+  .builder__header {
+    display: none;
+  }
+
+  .builder__editor {
+    display: none;
+  }
+}

@@ -74,9 +74,9 @@
                     class="tech-item"
                   >
                     <img
-                      *ngIf="getTechIcon(tech) as icon"
+                      *ngIf="getTechIcon(tech.name, tech.icon) as icon"
                       [src]="icon"
-                      [alt]="tech"
+                      [alt]="tech.name"
                       class="tech-icon"
                     />
                   </span>
